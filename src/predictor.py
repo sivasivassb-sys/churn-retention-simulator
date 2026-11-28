@@ -9,9 +9,10 @@ import shap
 
 from src.preprocessing import CATEGORICAL_COLS, load_and_split_data
 
-MODEL_PATH = Path("models/churn_model.joblib")
-METADATA_PATH = Path("models/model_metadata.json")
-BACKGROUND_PATH = Path("models/shap_background.npy")
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODEL_PATH = BASE_DIR / "models" / "churn_model.joblib"
+METADATA_PATH = BASE_DIR / "models" / "model_metadata.json"
+BACKGROUND_PATH = BASE_DIR / "models" / "shap_background.npy"
 
 DISPLAY_NAMES = {
     "tenure": "Tenure (Months)",

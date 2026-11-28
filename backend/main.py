@@ -119,7 +119,8 @@ app.add_middleware(
 def get_engine(request: Request) -> ChurnRetentionEngine:
     engine = getattr(request.app.state, "engine", None)
     if engine is None:
-        raise HTTPException(status_code=503, detail="ML engine not initialized.")
+        request.app.state.engine = ChurnRetentionEngine()
+        engine = request.app.state.engine
     return engine
 
 
