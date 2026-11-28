@@ -1,0 +1,118 @@
+{
+  "best_model_name": "XGBoost",
+  "recommended_threshold": 0.34,
+  "threshold_tuning_oof": {
+    "f1_optimal_threshold": 0.33,
+    "oof_best_f1": 0.6363,
+    "business_optimal_threshold": 0.34,
+    "oof_best_net_savings": 66950.0
+  },
+  "cv_benchmark": [
+    {
+      "Model": "XGBoost",
+      "CV_ROC_AUC": 0.847699406087789,
+      "CV_ROC_STD": 0.010918631839412213,
+      "CV_PR_AUC": 0.6627521771762471,
+      "CV_F1": 0.5822015536315479,
+      "CV_Recall": 0.5204013377926421,
+      "CV_Precision": 0.6619032160489395
+    },
+    {
+      "Model": "LogisticRegression",
+      "CV_ROC_AUC": 0.8473275005499115,
+      "CV_ROC_STD": 0.011725942941840721,
+      "CV_PR_AUC": 0.6611719057873555,
+      "CV_F1": 0.5934311993678432,
+      "CV_Recall": 0.5344481605351171,
+      "CV_Precision": 0.6690495112174188
+    },
+    {
+      "Model": "RandomForest",
+      "CV_ROC_AUC": 0.847301286588699,
+      "CV_ROC_STD": 0.010037721094104191,
+      "CV_PR_AUC": 0.662492806132606,
+      "CV_F1": 0.5707047202860633,
+      "CV_Recall": 0.49632107023411376,
+      "CV_Precision": 0.671771387843964
+    },
+    {
+      "Model": "LightGBM",
+      "CV_ROC_AUC": 0.8444324268834593,
+      "CV_ROC_STD": 0.010962134304409373,
+      "CV_PR_AUC": 0.6564332433155634,
+      "CV_F1": 0.5784009262716809,
+      "CV_Recall": 0.5170568561872909,
+      "CV_Precision": 0.657714447658075
+    }
+  ],
+  "test_evaluation_default": {
+    "threshold": 0.5,
+    "roc_auc": 0.8463,
+    "pr_auc": 0.6672,
+    "precision": 0.6622,
+    "recall": 0.5241,
+    "f1": 0.5851,
+    "confusion_matrix": {
+      "tn": 935,
+      "fp": 100,
+      "fn": 178,
+      "tp": 196
+    },
+    "expected_net_savings_usd": 14600.0
+  },
+  "test_evaluation_tuned": {
+    "threshold": 0.34,
+    "roc_auc": 0.8463,
+    "pr_auc": 0.6672,
+    "precision": 0.56,
+    "recall": 0.7487,
+    "f1": 0.6407,
+    "confusion_matrix": {
+      "tn": 815,
+      "fp": 220,
+      "fn": 94,
+      "tp": 280
+    },
+    "expected_net_savings_usd": 17000.0
+  },
+  "business_assumptions": {
+    "churn_loss_usd": 500.0,
+    "offer_cost_usd": 50.0,
+    "save_rate": 0.3
+  },
+  "engineered_feature_names": [
+    "tenure",
+    "MonthlyCharges",
+    "TotalCharges",
+    "total_active_services",
+    "avg_monthly_spend",
+    "monthly_charge_diff",
+    "SeniorCitizen",
+    "Partner",
+    "Dependents",
+    "PhoneService",
+    "MultipleLines",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "PaperlessBilling",
+    "has_support_bundle",
+    "is_new_customer",
+    "is_auto_pay",
+    "gender_Female",
+    "gender_Male",
+    "InternetService_DSL",
+    "InternetService_Fiber optic",
+    "InternetService_No",
+    "Contract_Month-to-month",
+    "Contract_One year",
+    "Contract_Two year",
+    "PaymentMethod_Bank transfer (automatic)",
+    "PaymentMethod_Credit card (automatic)",
+    "PaymentMethod_Electronic check",
+    "PaymentMethod_Mailed check"
+  ]
+}
