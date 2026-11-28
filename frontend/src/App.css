@@ -1,0 +1,889 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap");
+
+:root {
+  /* Pure White Page Canvas */
+  --canvas-white: #0a0601;
+
+  /* Royal Obsidian & Matte Black Surfaces */
+  --black-primary: #0b0b0d;
+  --black-surface: #121216;
+  --black-elevated: #19191f;
+  --black-deep: #070709;
+
+  /* Pure Metallic Royal Gold (No Orange / No Green / No Purple) */
+  --gold-bright: #f2da8d;
+  --gold-primary: #d4af37;
+  --gold-muted: #c29b38;
+  --gold-deep: #997622;
+  --gold-soft: rgba(212, 175, 55, 0.14);
+  --gold-border: rgba(212, 175, 55, 0.42);
+  --gold-hairline: rgba(212, 175, 55, 0.2);
+
+  /* Crisp Ivory & Champagne Neutrals (Inside Black Components) */
+  --ivory-primary: #faf6eb;
+  --ivory-secondary: #cdc5b4;
+  --ivory-muted: #8c8575;
+  --ivory-border: rgba(250, 246, 235, 0.22);
+
+  /* Typography */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Linear Spacing & Radii */
+  --module-gap: 64px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--canvas-white);
+  color: var(--ivory-primary);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+}
+
+::selection {
+  background: var(--gold-primary);
+  color: var(--black-deep);
+}
+
+/* ==========================================================================
+   LINEAR SINGLE-COLUMN SHELL
+   ========================================================================== */
+
+.app-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 52px 24px 96px;
+}
+
+/* ==========================================================================
+   SHARED ROYAL MODULE STYLING & LINEAR GAP ORNAMENTS
+   ========================================================================== */
+
+.top-bar,
+.persona-strip,
+.card {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, #101014 0%, var(--black-primary) 100%);
+  border: 1px solid var(--gold-border);
+  border-top: 2px solid var(--gold-primary);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 22px 48px -20px rgba(0, 0, 0, 0.34),
+    0 4px 14px -4px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(242, 218, 141, 0.16);
+}
+
+/* Eye-pleasing linear gold path & centered diamond inside every 64px gap */
+.top-bar::before,
+.persona-strip::before,
+.dashboard-grid > .card:first-child::before,
+.right-stack > .card:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--module-gap) * -1 - 1px);
+  width: 1px;
+  height: var(--module-gap);
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 55, 0.72) 0%,
+    rgba(212, 175, 55, 0.22) 50%,
+    rgba(212, 175, 55, 0.72) 100%
+  );
+  pointer-events: none;
+}
+
+.top-bar::after,
+.persona-strip::after,
+.dashboard-grid > .card:first-child::after,
+.right-stack > .card:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--module-gap) / -2 - 5px);
+  width: 9px;
+  height: 9px;
+  transform: translateX(-50%) rotate(45deg);
+  background: var(--canvas-white);
+  border: 1.5px solid var(--gold-primary);
+  box-shadow: 0 0 0 6px var(--canvas-white);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   MODULE 0: HEADER & MODEL TELEMETRY
+   ========================================================================== */
+
+.top-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 34px 38px;
+  margin-bottom: var(--module-gap);
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: var(--gold-bright);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--ivory-secondary);
+  letter-spacing: 0.015em;
+}
+
+.model-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 16px;
+  width: 100%;
+  border-top: 1px solid var(--gold-hairline);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--black-surface);
+  border: 1px solid var(--gold-hairline);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--ivory-secondary);
+  letter-spacing: 0.02em;
+}
+
+.badge-accent {
+  background: var(--gold-soft);
+  border-color: var(--gold-primary);
+  color: var(--gold-bright);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   ERROR BANNER
+   ========================================================================== */
+
+.error-banner {
+  position: relative;
+  z-index: 2;
+  padding: 16px 22px;
+  margin: -24px 0 40px;
+  border-radius: var(--radius-md);
+  background: var(--black-primary);
+  border: 1px solid var(--gold-primary);
+  border-left: 4px solid var(--gold-bright);
+  color: var(--gold-bright);
+  font-size: 0.86rem;
+  font-weight: 500;
+  box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   MODULE 0.5: QUICK PERSONAS STRIP
+   ========================================================================== */
+
+.persona-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 32px;
+  margin-bottom: var(--module-gap);
+}
+
+.strip-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold-primary);
+  margin-right: 8px;
+}
+
+.persona-btn {
+  appearance: none;
+  background: var(--black-surface);
+  color: var(--ivory-secondary);
+  border: 1px solid var(--gold-hairline);
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.persona-btn:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold-primary);
+  background: var(--black-elevated);
+}
+
+.persona-btn.active {
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-primary) 55%, var(--gold-deep) 100%);
+  color: var(--black-deep);
+  border-color: var(--gold-bright);
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.28);
+}
+
+/* ==========================================================================
+   STRICT LINEAR MODULE STACK
+   ========================================================================== */
+
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--module-gap);
+}
+
+.right-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--module-gap);
+}
+
+.card {
+  padding: 34px 38px;
+}
+
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--gold-hairline);
+}
+
+.card-header h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.32rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  color: var(--gold-bright);
+}
+
+/* ==========================================================================
+   FORM CONTROLS (BLACK & GOLD SELECTS + PRECISION SLIDERS)
+   ========================================================================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 24px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ivory-muted);
+}
+
+label strong {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+select {
+  color-scheme: dark;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 11px 38px 11px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--black-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid var(--gold-hairline);
+  color: var(--ivory-primary);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+}
+
+select option {
+  background-color: var(--black-primary);
+  color: var(--ivory-primary);
+}
+
+select:hover {
+  border-color: var(--gold-border);
+  background-color: var(--black-elevated);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+/* Precision Metallic Gold Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 26px;
+  background: transparent;
+  cursor: pointer;
+  margin: 2px 0 0;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: #232018;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--gold-bright), var(--gold-primary) 70%, var(--gold-deep));
+  border: 2px solid var(--black-deep);
+  box-shadow: 0 0 0 1px var(--gold-primary), 0 2px 8px rgba(0, 0, 0, 0.7);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.14);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25);
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: #232018;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--gold-bright), var(--gold-primary) 70%, var(--gold-deep));
+  border: 2px solid var(--black-deep);
+  box-shadow: 0 0 0 1px var(--gold-primary), 0 2px 8px rgba(0, 0, 0, 0.7);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.meta-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gold-hairline);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gold-muted);
+}
+
+/* ==========================================================================
+   ROYAL BUTTONS & SEGMENTED TOGGLES
+   ========================================================================== */
+
+.btn-primary,
+.btn-secondary {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-primary) 55%, var(--gold-deep) 100%);
+  color: var(--black-deep);
+  border: 1px solid var(--gold-bright);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.24);
+}
+
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(212, 175, 55, 0.34);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: var(--black-surface);
+  color: var(--gold-bright);
+  border: 1px solid var(--gold-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--gold-soft);
+  border-color: var(--gold-bright);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px 20px;
+  font-size: 0.84rem;
+}
+
+/* Before / After Segmented Switch */
+.toggle-group {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  background: var(--black-deep);
+  border: 1px solid var(--gold-hairline);
+  gap: 4px;
+}
+
+.toggle-group button {
+  appearance: none;
+  background: transparent;
+  color: var(--ivory-muted);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.toggle-group button:hover {
+  color: var(--gold-bright);
+}
+
+.toggle-group button.active {
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-primary) 100%);
+  color: var(--black-deep);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   KPI METRIC CARDS & RISK TIER BADGES
+   ========================================================================== */
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.kpi-box {
+  background: var(--black-surface);
+  border: 1px solid var(--gold-hairline);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kpi-highlight {
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, var(--black-surface) 100%);
+  border-color: var(--gold-primary);
+}
+
+.kpi-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-muted);
+}
+
+.kpi-value-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 2px 0;
+}
+
+.kpi-big {
+  font-family: var(--font-mono);
+  font-size: 2.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ivory-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.kpi-sub {
+  font-size: 0.8rem;
+  color: var(--ivory-secondary);
+}
+
+/* Strictly Black, Gold & Ivory Risk Tiers */
+.tier-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid transparent;
+}
+
+.tier-high {
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-primary) 100%);
+  color: var(--black-deep);
+  border-color: var(--gold-bright);
+}
+
+.tier-medium {
+  background: var(--gold-soft);
+  color: var(--gold-bright);
+  border-color: var(--gold-primary);
+}
+
+.tier-low {
+  background: var(--black-deep);
+  color: var(--ivory-primary);
+  border-color: var(--ivory-border);
+}
+
+/* ==========================================================================
+   SHAP EXPLAINABILITY CHART (METALLIC GOLD vs. CHAMPAGNE IVORY)
+   ========================================================================== */
+
+.shap-panel {
+  background: var(--black-surface);
+  border: 1px solid var(--gold-hairline);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+}
+
+.shap-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--gold-hairline);
+}
+
+.shap-header h4 {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-primary);
+}
+
+.shap-formula {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ivory-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.shap-formula strong {
+  color: var(--gold-bright);
+  font-weight: 700;
+}
+
+.shap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shap-row {
+  display: grid;
+  grid-template-columns: 205px 1fr 74px;
+  align-items: center;
+  gap: 14px;
+  padding: 7px 10px;
+  margin: 0 -10px;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease;
+}
+
+.shap-row:hover {
+  background: rgba(212, 175, 55, 0.07);
+}
+
+.shap-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.shap-name {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--ivory-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shap-val {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ivory-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shap-track {
+  display: flex;
+  align-items: center;
+  height: 15px;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: var(--black-deep);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.shap-half {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+.shap-left {
+  justify-content: flex-end;
+}
+
+.shap-right {
+  justify-content: flex-start;
+}
+
+.shap-center-line {
+  width: 1px;
+  height: 100%;
+  background: var(--gold-primary);
+  flex-shrink: 0;
+}
+
+.shap-bar {
+  height: 100%;
+  transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Right side (+ increases churn risk): Solid Royal Gold */
+.bar-risk {
+  background: linear-gradient(90deg, var(--gold-deep) 0%, var(--gold-primary) 55%, var(--gold-bright) 100%);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Left side (- reduces churn risk): Brushed Champagne Ivory */
+.bar-safe {
+  background: linear-gradient(270deg, #9d9687 0%, var(--ivory-primary) 100%);
+  border-radius: 2px 0 0 2px;
+}
+
+.shap-impact {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-risk {
+  color: var(--gold-bright);
+}
+
+.text-safe {
+  color: var(--ivory-primary);
+}
+
+/* ==========================================================================
+   ROI SUMMARY CALLOUT
+   ========================================================================== */
+
+.roi-card {
+  margin-top: 22px;
+  padding: 20px 22px;
+  border-radius: var(--radius-md);
+  background: var(--black-surface);
+  border: 1px solid var(--gold-hairline);
+}
+
+.roi-positive {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.14) 0%, var(--black-surface) 75%);
+  border-color: var(--gold-primary);
+  border-left: 4px solid var(--gold-bright);
+}
+
+.roi-negative {
+  background: var(--black-deep);
+  border-color: var(--ivory-border);
+  border-left: 4px solid var(--ivory-muted);
+}
+
+.roi-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--gold-hairline);
+}
+
+.roi-top strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ivory-primary);
+  letter-spacing: 0.01em;
+}
+
+.roi-net {
+  font-family: var(--font-mono);
+  font-size: 0.96rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.roi-positive .roi-net {
+  color: var(--gold-bright);
+}
+
+.roi-negative .roi-net {
+  color: var(--ivory-secondary);
+}
+
+.roi-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ivory-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-width: 720px) {
+  :root {
+    --module-gap: 48px;
+  }
+
+  .app-shell {
+    padding: 28px 16px 64px;
+  }
+
+  .top-bar,
+  .card {
+    padding: 24px 20px;
+  }
+
+  .persona-strip {
+    padding: 16px 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shap-row {
+    grid-template-columns: 135px 1fr 60px;
+    gap: 10px;
+  }
+
+  .roi-metrics {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
